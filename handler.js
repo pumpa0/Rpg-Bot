@@ -101,7 +101,7 @@ module.exports = {
                 if (!('name' in user)) user.name = this.getName(m.sender)
                 if (!isNumber(user.regTime)) user.regTime = -1
             }
-            if (!('autolevelup' in user)) user.autolevelup = true
+            if (!('autolevelup' in user)) user.autolevelup = false
             if (!('ah' in user)) user.ah = []
             if (!('mission' in user)) user.mission = {}
         } else global.DATABASE._data.users[m.sender] = {
@@ -164,7 +164,7 @@ module.exports = {
             registered: false,
             name: this.getName(m.sender),
             regTime: -1,
-            autolevelup: true,
+            autolevelup: false,
             ah: [],
             mission: {},
         }
@@ -447,7 +447,6 @@ ${(global.linkGC).map((v, i) => '*Group ' + (i + 1) + '*\n' + v).join`\n\n`}
       case 'add':
       case 'remove':
         if (chat.welcome) {
-
           let groupMetadata = await this.groupMetadata(jid)
           for (let user of participants) {
             let pp = 'https://i.ibb.co/tLjSdjM/avatar-contact.png'
@@ -484,7 +483,8 @@ ${(global.linkGC).map((v, i) => '*Group ' + (i + 1) + '*\n' + v).join`\n\n`}
               })
             }
           }
-        }        break
+        }       
+       break
       case 'promote':
         text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
       case 'demote':
