@@ -483,7 +483,7 @@ ${(global.linkGC).map((v, i) => '*Group ' + (i + 1) + '*\n' + v).join`\n\n`}
   .setColor("avatar", "#8015EA")
   .setBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeoNQ4Io1Z0_TtUmKpnoRwXjYjN6bRYP0JWQ&usqp=CAU")
   .toAttachment();
-          this.sendButtonLoc(jid, action === 'add' ? wel.toBuffer() : lea.toBuffer(), text, botwm, 'MENU', '.menu', null, {
+          this.sendButtonLoc(jid, action === 'add' ? wel.toBuffer() : lea.toBuffer(), text, global.botwm, 'MENU', '.menu', {
                 contextInfo: {
 
                   mentionedJid: [user]
