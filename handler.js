@@ -2,7 +2,7 @@ let util = require('util')
 let simple = require('./lib/simple')
 let { MessageType } = require('@adiwajshing/baileys')
 const Canvas = require("discord-canvas")
-const uploadImage = require('./Lib/uploadImage')
+const uploadImage = require('./lib/uploadImage')
 
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(resolve, ms))
@@ -170,7 +170,7 @@ module.exports = {
         if (typeof chat !== 'object') global.DATABASE._data.chats[m.chat] = {}
         if (chat) {
           if (!('isBanned' in chat)) chat.isBanned = false
-          if (!('welcome' in chat)) chat.welcome = false
+          if (!('welcome' in chat)) chat.welcome = true
           if (!('detect' in chat)) chat.detect = false
           if (!('sWelcome' in chat)) chat.sWelcome = ''
           if (!('sBye' in chat)) chat.sBye = ''
@@ -180,7 +180,7 @@ module.exports = {
          if (!('viewonce' in chat)) chat.viewonce = true
         } else global.DATABASE._data.chats[m.chat] = {
           isBanned: false,
-          welcome: false,
+          welcome: true,
           detect: false,
           sWelcome: '',
           sBye: '',
