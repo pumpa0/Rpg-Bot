@@ -48,7 +48,7 @@ global.APIKeys = { // APIKey Here
 
 // Sticker WM
 global.packname = 'wa.me/6285713964963'
-global.author = 'Metro Bot Is The Best'
+global.author = 'GAME BOT WHATSAPP'
 
 global.multiplier = 39 // The higher, The harder levelup
 
