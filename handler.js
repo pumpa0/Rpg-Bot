@@ -1,6 +1,8 @@
 let util = require('util')
 let simple = require('./lib/simple')
 let { MessageType } = require('@adiwajshing/baileys')
+const Canvas = require("discord-canvas")
+const uploadImage = require('./Lib/uploadImage')
 
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(resolve, ms))
@@ -442,20 +444,51 @@ ${(global.linkGC).map((v, i) => '*Group ' + (i + 1) + '*\n' + v).join`\n\n`}
       case 'add':
       case 'remove':
         if (chat.welcome) {
+
           let groupMetadata = await this.groupMetadata(jid)
           for (let user of participants) {
-            let pp = './src/avatar_contact.png'
-            try {
-              pp = await this.getProfilePicture(user)
-            } catch (e) {
-            } finally {
-              text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(jid)).replace('@desc', groupMetadata.desc) :
-                (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
-              this.sendFile(jid, pp, 'pp.jpg', text, null, false, {
+            let pp = 'https://i.ibb.co/tLjSdjM/avatar-contact.png'
+            let ppgc = 'https://i.ibb.co/jr9Nh6Q/Thumb.jpg'
+              try {
+              pp = await uploadImage(await (await fetch(await this.getProfilePicture(user))).buffer())
+              ppgc = await uploadImage(await (await fetch(await this.getProfilePicture(jid))).buffer())
+            } catch (e) {  
+             } finally {
+           let wel = await new Canvas.Goodbye()
+  .setUsername(this.getName(user))
+  .setDiscriminator(groupMetadata.participants.length)
+  .setMemberCount(groupMetadata.participants.length)
+  .setGuildName(this.getName(jid))
+  .setAvatar(pp)
+  .setColor("border", "#8015EA")
+  .setColor("username-box", "#8015EA")
+  .setColor("discriminator-box", "#8015EA")
+  .setColor("message-box", "#8015EA")
+  .setColor("title", "#8015EA")
+  .setColor("avatar", "#8015EA")
+  .setBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeoNQ4Io1Z0_TtUmKpnoRwXjYjN6bRYP0JWQ&usqp=CAU")
+  .toAttachment();
+
+           let lea = await new Canvas.Welcome()
+  .setUsername(this.getName(user))
+  .setDiscriminator(groupMetadata.participants.length)
+  .setMemberCount(groupMetadata.participants.length)
+  .setGuildName(this.getName(jid))
+  .setAvatar(pp)
+  .setColor("border", "#8015EA")
+  .setColor("username-box", "#8015EA")
+  .setColor("discriminator-box", "#8015EA")
+  .setColor("message-box", "#8015EA")
+  .setColor("title", "#8015EA")
+  .setColor("avatar", "#8015EA")
+  .setBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeoNQ4Io1Z0_TtUmKpnoRwXjYjN6bRYP0JWQ&usqp=CAU")
+  .toAttachment();
+          this.sendButtonLoc(jid, action === 'add' ? wel.toBuffer() : lea.toBuffer(), text, null, {
                 contextInfo: {
+
                   mentionedJid: [user]
                 }
-              })
+              })           
             }
           }
         }
