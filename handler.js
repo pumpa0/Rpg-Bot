@@ -87,6 +87,8 @@ module.exports = {
 
             if (!isNumber(user.lastadventure)) user.lastadventure = 0
             if (!isNumber(user.lastfishing)) user.lastfishing = 0
+            if (!isNumber(user.lastberburu)) user.lastberburu = 0
+           
             if (!isNumber(user.lastdungeon)) user.lastdungeon = 0
             if (!isNumber(user.lastslot)) user.lastslot = 0
             if (!isNumber(user.lastduel)) user.lastduel = 0
@@ -151,6 +153,7 @@ module.exports = {
             fishingroddurability: 0,
             lastadventure: 0,
             lastfishing: 0,
+            lastberburu: 0,
             lastdungeon: 0,
             lastslot: 0,
             lastduel: 0,
