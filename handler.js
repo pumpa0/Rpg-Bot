@@ -498,23 +498,7 @@ ${(global.linkGC).map((v, i) => '*Group ' + (i + 1) + '*\n' + v).join`\n\n`}
         break
     }
   },
-  async delete(m) {
-    if (m.key.remoteJid == 'status@broadcast') return
-    if (m.key.fromMe) return
-    let chat = global.DATABASE._data.chats[m.key.remoteJid]
-    if (chat.delete) return
-    await this.reply(m.key.remoteJid, `
-Terdeteksi @${m.participant.split`@`[0]} telah menghapus pesan
-
-Untuk mematikan fitur ini, ketik
-*.enable delete*
-`.trim(), m.message, {
-      contextInfo: {
-        mentionedJid: [m.participant]
-      }
-    })
-    this.copyNForward(m.key.remoteJid, m.message).catch(e => console.log(e, m))
-  },
+  
   async onCall(json) {
     let { from } = json[2][0][1]
     let ids = 'call-id' in json[2][0][2][0][1] ? Object.entries(json[2][0][2][0][1]) : []
