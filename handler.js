@@ -467,7 +467,7 @@ ${(global.linkGC).map((v, i) => '*Group ' + (i + 1) + '*\n' + v).join`\n\n`}
   .setColor("title", "#8015EA")
   .setColor("avatar", "#8015EA")
   .setBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeoNQ4Io1Z0_TtUmKpnoRwXjYjN6bRYP0JWQ&usqp=CAU")
-  .toAttachment();
+  .toAttachment()
 
            let lea = await new Canvas.Welcome()
   .setUsername(this.getName(user))
@@ -482,10 +482,9 @@ ${(global.linkGC).map((v, i) => '*Group ' + (i + 1) + '*\n' + v).join`\n\n`}
   .setColor("title", "#8015EA")
   .setColor("avatar", "#8015EA")
   .setBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeoNQ4Io1Z0_TtUmKpnoRwXjYjN6bRYP0JWQ&usqp=CAU")
-  .toAttachment();
-          this.sendButtonLoc(jid, action === 'add' ? wel.toBuffer() : lea.toBuffer(), text, global.botwm, 'MENU', '.menu', {
+  .toAttachment()
+          this.sendFile(jid, action === 'add' ? wel.toBuffer() : lea.toBuffer(), 'pp.jpg', text, null, false, {
                 contextInfo: {
-
                   mentionedJid: [user]
                 }
               })           
