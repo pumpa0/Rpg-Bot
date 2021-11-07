@@ -1,7 +1,7 @@
 let util = require('util')
 let simple = require('./lib/simple')
 let { MessageType } = require('@adiwajshing/baileys')
-const Canvas = require("discord-canvas")
+const knights = require("knights-canvas")
 const uploadImage = require('./lib/uploadImage')
 
 const isNumber = x => typeof x === 'number' && !isNaN(x)
@@ -452,46 +452,36 @@ ${(global.linkGC).map((v, i) => '*Group ' + (i + 1) + '*\n' + v).join`\n\n`}
               try {
               pp = await uploadImage(await (await fetch(await this.getProfilePicture(user))).buffer())
               ppgc = await uploadImage(await (await fetch(await this.getProfilePicture(jid))).buffer())
-            } catch (e) {  
-             } finally {
-           let wel = await new Canvas.Goodbye()
-  .setUsername(this.getName(user))
-  .setDiscriminator(groupMetadata.participants.length)
-  .setMemberCount(groupMetadata.participants.length)
-  .setGuildName(this.getName(jid))
-  .setAvatar(pp)
-  .setColor("border", "#8015EA")
-  .setColor("username-box", "#8015EA")
-  .setColor("discriminator-box", "#8015EA")
-  .setColor("message-box", "#8015EA")
-  .setColor("title", "#8015EA")
-  .setColor("avatar", "#8015EA")
-  .setBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeoNQ4Io1Z0_TtUmKpnoRwXjYjN6bRYP0JWQ&usqp=CAU")
-  .toAttachment()
+            } catch (e) {
+            } finally {
+              text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', this.getName(jid)).replace('@desc', groupMetadata.desc) :
+                   (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
+              let wel = await new knights.Welcome()
+                .setUsername(this.getName(user))
+                .setGuildName(this.getName(jid))
+                .setGuildIcon(pp)
+                .setMemberCount(groupMetadata.participants.length)
+                .setAvatar(pp)
+                .setBackground("https://i.ibb.co/cFXcnX4/need-for-speed-payback.jpg")
+                .toAttachment()
 
-           let lea = await new Canvas.Welcome()
-  .setUsername(this.getName(user))
-  .setDiscriminator(groupMetadata.participants.length)
-  .setMemberCount(groupMetadata.participants.length)
-  .setGuildName(this.getName(jid))
-  .setAvatar(pp)
-  .setColor("border", "#8015EA")
-  .setColor("username-box", "#8015EA")
-  .setColor("discriminator-box", "#8015EA")
-  .setColor("message-box", "#8015EA")
-  .setColor("title", "#8015EA")
-  .setColor("avatar", "#8015EA")
-  .setBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeoNQ4Io1Z0_TtUmKpnoRwXjYjN6bRYP0JWQ&usqp=CAU")
-  .toAttachment()
-          this.sendFile(jid, action === 'add' ? wel.toBuffer() : lea.toBuffer(), 'pp.jpg', text, null, false, {
+              let lea = await new knights.Goodbye()
+                .setUsername(this.getName(user))
+                .setGuildName(this.getName(jid))
+                .setGuildIcon(pp)
+                .setMemberCount(groupMetadata.participants.length)
+                .setAvatar(pp)
+                .setBackground("https://i.ibb.co/W6Hd2tR/Vdth-sn7-R1-Cje-Jb-I1a-A1-Hg.jpg")
+                .toAttachment()
+
+              this.sendFile(jid, action === 'add' ? wel.toBuffer() : lea.toBuffer(), 'pp.jpg', text, null, false, {
                 contextInfo: {
                   mentionedJid: [user]
                 }
-              })           
+              })
             }
           }
-        }
-        break
+        }        break
       case 'promote':
         text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
       case 'demote':
